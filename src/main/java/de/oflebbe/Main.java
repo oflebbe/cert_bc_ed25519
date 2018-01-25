@@ -20,8 +20,8 @@ public class Main {
     public static void main(String[] args) {
 	    // write your code here
 
-        Security.addProvider( new BouncyCastleProvider());
         Security.addProvider( new EdDSASecurityProvider());
+        Security.addProvider( new BouncyCastleProvider());
 
         FileReader fileReader = null;
         try {
@@ -47,7 +47,7 @@ public class Main {
 
         try {
             ContentVerifierProvider contentVerifierProvider = new JcaContentVerifierProviderBuilder()
-                    .setProvider("BC").build(a);
+                    .build(a);
             System.out.println(a.isSignatureValid(contentVerifierProvider));
         } catch (OperatorCreationException e) {
             e.printStackTrace();
