@@ -10,20 +10,18 @@
     <dependencies>
         <dependency>
             <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk15on</artifactId>
-            <version>1.59</version>
+            <artifactId>bcpkix-jdk15on</artifactId>
+            <version>1.59</version>11
         </dependency>
         <dependency>
             <groupId>org.bouncycastle</groupId>
-            <artifactId>bcpkix-jdk15on</artifactId>
+            <artifactId>bcprov-jdk15on</artifactId>
             <version>1.59</version>
         </dependency>
-
         <dependency>
             <groupId>net.i2p.crypto</groupId>
             <artifactId>eddsa</artifactId>
             <version>0.2.0</version>
         </dependency>
     </dependencies>
-
 </project>

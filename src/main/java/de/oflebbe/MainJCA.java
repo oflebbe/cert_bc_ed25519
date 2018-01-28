@@ -14,14 +14,15 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.security.Security;
 import java.security.cert.CertificateException;
+import java.util.Date;
 
-public class Main {
+public class MainJCA {
 
     public static void main(String[] args) {
 	    // write your code here
 
-        Security.addProvider( new EdDSASecurityProvider());
         Security.addProvider( new BouncyCastleProvider());
+        Security.addProvider( new EdDSASecurityProvider());
 
         FileReader fileReader = null;
         try {
@@ -42,13 +43,14 @@ public class Main {
             e.printStackTrace();
         }
 
-        X509CertificateHolder a = (X509CertificateHolder) obj;
-        System.out.println(a.getIssuer());
-
+        X509CertificateHolder cert = (X509CertificateHolder) obj;
+        System.out.println(cert.getIssuer());
+        System.out.println(cert.getSignatureAlgorithm().getAlgorithm());
+        System.out.println(cert.getSubjectPublicKeyInfo().getAlgorithm().getAlgorithm());
         try {
             ContentVerifierProvider contentVerifierProvider = new JcaContentVerifierProviderBuilder()
-                    .build(a);
-            System.out.println(a.isSignatureValid(contentVerifierProvider));
+                    .build(cert);
+            System.out.println(cert.isSignatureValid(contentVerifierProvider));
         } catch (OperatorCreationException e) {
             e.printStackTrace();
         } catch (CertificateException e) {
@@ -56,5 +58,7 @@ public class Main {
         } catch (CertException e) {
             e.printStackTrace();
         }
+
+        System.out.println(cert.isValidOn( new Date()));
     }
 }
